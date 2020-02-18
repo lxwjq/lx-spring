@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 可以使用default-autowire指定自动装配的类型（全局指定）
+    也可以全局指定 在bean中增加autowire -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="dao" class="com.thislx.ioc.dao.impl.IndexDaoImpl"/>
+
+    <bean id="indexDao2" class="com.thislx.ioc.dao.impl.IndexDaoImpl2"/>
+
+    <!-- 由于Bean之间的依赖使用以下方式维护非常复杂，
+    一个ABean依赖了10个Bean,我需要在ABean的节点中增加10个<property name="indexDao" ref="dao"/>这样的配置，
+    配置文件配置非常复杂，结构也非常不清晰，不利于阅读。所以引入【自动装配】 -->
+    <bean id="test" class="com.thislx.ioc.service.TestService">
+        <!-- <property name="indexDao" ref="dao"/> -->
+        <!--        <constructor-arg ref="dao"/>-->
+    </bean>
+</beans>
